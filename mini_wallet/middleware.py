@@ -17,8 +17,13 @@ class WalletMiddleware:
         return self.get_response(request)
 
     def process_view(self, request, view_func, view_args, view_kwargs):
-        if request.path.startswith(reverse('wallet:wallet')) and request.method == 'GET':
-            token = request.headers.get('Authorization').split()[1]
+        if request.path.startswith(reverse('wallet:wallet')) and request.method == 'GET' or request.path.startswith(
+                reverse('wallet:deposits')) or request.path.startswith(reverse('wallet:withdraws')):
+            auth = request.headers.get('Authorization')
+            if not auth:
+                return HttpResponse(json.dumps('Token Is Required'), status=HTTP_401_UNAUTHORIZED)
+
+            token = auth.split()[1]
             token_obj = Token.objects.get(key=token)
             wallet = Wallet.objects.get(owned_by=token_obj.user)
 

@@ -28,11 +28,12 @@ class Transaction(models.Model):
         FAILED = 'Failed'
 
     id = models.UUIDField(editable=False, default=uuid.uuid4, unique=True, primary_key=True)
-    wallet = models.ForeignKey(Wallet, on_delete=models.CASCADE)
     status = models.CharField(max_length=8, choices=TransactionStatus.choices)
-    amount = models.DecimalField(max_digits=12, decimal_places=2, default=0)
-    refrence_id = models.UUIDField(editable=False, default=uuid.uuid4, unique=True)
-    deposited_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=12, decimal_places=2)
+    refrence_id = models.UUIDField()
+    transaction_by = models.ForeignKey(User, on_delete=models.CASCADE)
     deposited_at = models.DateTimeField(blank=True, null=True)
-    withdrawn_by = models.ForeignKey(User, on_delete=models.CASCADE)
     withdrawn_at = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.id}'

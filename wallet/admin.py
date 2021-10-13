@@ -1,8 +1,13 @@
 from django.contrib import admin
 
-from .models import Wallet
+from .models import Wallet, Transaction
 
 
 @admin.register(Wallet)
 class WalletAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'status', 'balance')
+
+
+@admin.register(Transaction)
+class TransactionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'amount', 'transaction_by')
