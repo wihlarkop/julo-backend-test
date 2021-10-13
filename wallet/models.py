@@ -7,11 +7,11 @@ from django.db import models
 
 class Wallet(models.Model):
     class WalletStatus(models.TextChoices):
-        ENABLE = 'Enabled'
-        DISABLE = 'Disabled'
+        ENABLED = 'Enabled'
+        DISABLED = 'Disabled'
 
     id = models.UUIDField(editable=False, default=uuid.uuid4, unique=True, primary_key=True)
-    status = models.CharField(max_length=8, choices=WalletStatus.choices, default=WalletStatus.DISABLE)
+    status = models.CharField(max_length=8, choices=WalletStatus.choices, default=WalletStatus.DISABLED)
     balance = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     enabled_at = models.DateTimeField(blank=True, null=True)
     disabled_at = models.DateTimeField(blank=True, null=True)

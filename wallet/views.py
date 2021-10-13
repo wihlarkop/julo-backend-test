@@ -43,11 +43,11 @@ class WalletView(APIView):
     def post(self, request):
         wallet = Wallet.objects.get(owned_by=self.request.user)
 
-        if wallet.status == 'Enable':
+        if wallet.status == 'Enabled':
             raise NotFound('Wallet Is Active')
 
         if wallet:
-            wallet.status = 'Enable'
+            wallet.status = 'Enabled'
             wallet.enabled_at = timezone.now()
             wallet.save()
 
@@ -62,12 +62,12 @@ class WalletView(APIView):
         is_disabled = request.data.get('is_disabled')
         wallet = Wallet.objects.get(owned_by=self.request.user)
 
-        if wallet.status == 'Disable':
+        if wallet.status == 'Disabled':
             raise NotFound('Wallet Is Disabled')
 
         if wallet:
             if is_disabled:
-                wallet.status = 'Disable'
+                wallet.status = 'Disabled'
                 wallet.disabled_at = timezone.now()
                 wallet.save()
 

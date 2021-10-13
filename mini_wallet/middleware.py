@@ -27,6 +27,6 @@ class WalletMiddleware:
             token_obj = Token.objects.get(key=token)
             wallet = Wallet.objects.get(owned_by=token_obj.user)
 
-            if wallet.status == 'Disable':
+            if wallet.status == 'Disabled':
                 return HttpResponse(json.dumps('Wallet Is Disable You Need Activate Wallet'),
                                     status=HTTP_401_UNAUTHORIZED)
