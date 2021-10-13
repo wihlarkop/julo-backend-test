@@ -30,3 +30,5 @@ then go to for get user uuid
 ```djangourlpath
 http://localhost:8000/admin/account/customuser/
 ```
+
+you can import my postman collection for know the endpoint (<b>Julo Backend Test.postman_collection.json<b>)
