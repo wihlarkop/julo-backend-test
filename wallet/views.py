@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import Wallet, Transaction
-from .serializers import WalletSerializer, DepositSerializer
+from .serializers import WalletSerializer
 
 
 class InitWalletView(APIView):
